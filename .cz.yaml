@@ -78,4 +78,4 @@ commitizen:
     schema_pattern: (feat|fix|doc|cicd|maint|bump|break):(\s.*)
   name: cz_customize
   tag_format: v$version
-  version: 0.1.0
+  version: 0.1.1
