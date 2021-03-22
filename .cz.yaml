@@ -78,6 +78,6 @@ commitizen:
     schema_pattern: (feat|fix|doc|cicd|maint|bump|break):(\s.*)
   name: cz_customize
   tag_format: v$version
-  version: 0.1.1
+  version: 0.2.0
   version_files:
-    - "cmd/version.go"
+  - cmd/version.go
