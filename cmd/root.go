@@ -17,10 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"encoding/base64"
 	"fmt"
-	"html/template"
-	"io/ioutil"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -34,58 +31,17 @@ var filename string
 var namespace string
 var name string
 
-var templateTxt = `---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: {{ .SecretName }}
-  namespace: {{ .Namespace }}
-type: Opaque
-data:
-  {{ range $key, $val := .Files }}{{$key}}: {{$val}}{{end}}
-`
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "file2kube",
 	Short: "file2kube creates Kubernetes secrets from files",
-	Long:  `file2kube is a utility that creates Kubernetes secrets from plaintext files, by doing the boilerplate for you and base64 encoding the file data.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	Run: convert,
+	Long:  `file2kube is a utility that creates Kubernetes objects from plaintext files.`,
 }
 
 type TemplateData struct {
 	Name      string
 	Namespace string
 	Files     map[string]string
-}
-
-func convert(cmd *cobra.Command, args []string) {
-	data := TemplateData{
-		Name:      name,
-		Namespace: namespace,
-		Files:     make(map[string]string),
-	}
-	for _, arg := range args {
-		file, err := ioutil.ReadFile(arg)
-		if err != nil {
-			fmt.Printf("Couldn't read %s: %s\n", arg, err.Error())
-		}
-		enc := base64.StdEncoding.EncodeToString([]byte(file))
-		// fmt.Printf("Encoded: %s\n", enc)
-		data.Files[arg] = enc
-	}
-
-	t := template.Must(template.New("secret-tmpl").Parse(templateTxt))
-	f, err := os.Create(filename)
-	if err != nil {
-		panic(err)
-	}
-	err = t.Execute(f, data)
-	if err != nil {
-		fmt.Printf("Error printing template: '%s'\n", err)
-	}
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

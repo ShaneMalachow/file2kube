@@ -31,6 +31,10 @@ var secretCmd = &cobra.Command{
 	Short: "Converts files into Kubernetes secrets with base64 encoding",
 	Long:  `This command converts files into a single Kubernetes Secret by base64 encoding all the data and including it with the key being the file name. Useful for things like certificates and keys.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) < 1 {
+			fmt.Println("At least one argument required.")
+			return
+		}
 		data := TemplateData{
 			Name:      name,
 			Namespace: namespace,

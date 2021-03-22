@@ -31,6 +31,10 @@ var configmapCmd = &cobra.Command{
 	Short: "Converts files into a single Kubernetes ConfigMap",
 	Long:  `This command converts files into a single Kubernetes ConfigMap with the key being the file name. Useful for things like config files.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) < 1 {
+			fmt.Println("At least one argument required.")
+			return
+		}
 		data := TemplateData{
 			Name:      name,
 			Namespace: namespace,
