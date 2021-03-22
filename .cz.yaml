@@ -1,0 +1,81 @@
+commitizen:
+  customize:
+    bump_map:
+      break: MAJOR
+      feat: MINOR
+      fix: PATCH
+    bump_pattern: ^(feat|fix|break)\!?
+    example: 'feat: this feature enables customize through config files'
+    info: 'Commit messages take the format "type: message". Type being either
+
+      feat, fix, doc, ci, or maint, and message being
+
+      the commit message.
+
+
+
+      If you are making a breaking change (either a breaking feature or a breaking
+
+      fix), a ! will be appended to your commit type and the next version will be
+
+      considered MAJOR.
+
+
+
+      Issue types explained:
+
+
+      - feat: A new feature. Adding in a new function that is backwards compatible.
+
+
+      - fix: A bug fix. This should not add new functionality but fix functionality
+
+      that has been introduced incorrectly, in a backwards compatible fashion. Can
+
+      also be for refactors to improve maintenance or functionality.
+
+
+      - doc: A documentation change. Does not touch actual code.
+
+
+      - cicd: A CI/CD change. Things like the Drone configuration or pre-commit rules.
+
+
+      - maint: A generic maintenance change. Things we don''t have specific change
+
+      types for but don''t introduce functionality or fixes.
+
+
+      - break: A breaking API change. These changes should be made cautiously, and
+      only if absolutely necessary. They break backwards compatibility with previous
+      versions of the API.
+
+      '
+    message_template: '{{change_type}}: {{message}}{% if show_body %}
+
+      {{body}}{% endif %}'
+    questions:
+    - choices:
+      - name: 'feat:  A new feature.'
+        value: feat
+      - name: 'fix:   A bug fix.'
+        value: fix
+      - name: 'doc:   A documentation change.'
+        value: doc
+      - name: 'cicd:  A CI/CD change.'
+        value: cicd
+      - name: 'maint: A generic maintenance change.'
+        value: maint
+      - name: 'break: A breaking change that breaks API backwards compatibility.'
+        value: break
+      message: Select the type of change you are committing
+      name: change_type
+      type: list
+    - message: 'Enter commit message:'
+      name: message
+      type: input
+    schema: '<type>(<issue>): <body>'
+    schema_pattern: (feat|fix|doc|cicd|maint|bump|break):(\s.*)
+  name: cz_customize
+  tag_format: v$version
+  version: 0.0.0
