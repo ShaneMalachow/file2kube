@@ -4,7 +4,7 @@ file2kube provides a command-line utility to take existing configuration files a
 
 ## Installation
 
-`go install github.com/shanemalachow/file2kube`
+`go get -u github.com/shanemalachow/file2kube`
 
 ## Usage
 
