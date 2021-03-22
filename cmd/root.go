@@ -64,8 +64,8 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.PersistentFlags().StringVarP(&name, "name", "n", "new-file", "The name for the Secret object")
-	rootCmd.PersistentFlags().StringVar(&namespace, "namespace", "default", "The Kubernetes Namespace to create the Secret in")
+	rootCmd.PersistentFlags().StringVarP(&name, "name", "n", "new-file", "The name for the Kubernetes object")
+	rootCmd.PersistentFlags().StringVar(&namespace, "namespace", "default", "The Kubernetes Namespace to create the object in")
 	rootCmd.PersistentFlags().StringVarP(&filename, "filename", "f", name+".yaml", "The name of the file")
 }
 
