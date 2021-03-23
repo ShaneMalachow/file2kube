@@ -22,7 +22,9 @@ metadata:
   namespace: {{ .Namespace }}
 type: Opaque
 data:
-  {{ range $key, $val := .Files }}{{$key}}: {{$val}}{{end}}
+  {{ range $key, $val := .Files }}
+  {{$key}}: {{$val}}
+  {{end}}
 `
 
 // secretCmd represents the secret command

@@ -22,7 +22,8 @@ metadata:
   namespace: {{ .Namespace }}
 data:
   {{ range $key, $val := .Files }}{{$key}}: |
-    {{$val}}{{end}}
+    {{$val}}
+	{{end}}
 `
 
 // configmapCmd represents the configmap command
